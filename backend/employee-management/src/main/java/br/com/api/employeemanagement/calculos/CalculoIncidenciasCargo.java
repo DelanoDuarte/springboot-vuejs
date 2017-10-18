@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import org.springframework.stereotype.Service;
 
 import br.com.api.employeemanagement.domain.Funcionario;
+import br.com.api.employeemanagement.domain.IncidenciaSalario;
 import br.com.api.employeemanagement.domain.TipoIncidenciaSalario;
 
 /**
@@ -25,36 +26,32 @@ public class CalculoIncidenciasCargo implements Serializable {
 
 	public Double calcularSalarioFuncionario(Funcionario funcionario) {
 
-		BigDecimal salarioFuncionario = null;
+		Double salarioFuncionario = funcionario.getSalarioFuncionario().doubleValue();
+		Double salarioCalculado = 0.0;
 
 		try {
 			if (funcionario.getFuncionarioCargo().getCargoIncidenciasSalario().isEmpty()) {
 				return 0.0;
 			}
 
-			funcionario.getFuncionarioCargo().getCargoIncidenciasSalario().stream().forEach(cargoIs -> {
-
-				double salarioGratificacao = 0.0;
-				double salarioDesconto = 0.0;
+			for (IncidenciaSalario cargoIs : funcionario.getFuncionarioCargo().getCargoIncidenciasSalario()) {
 
 				if (cargoIs.getTipoIncidenciaSalario().equals(TipoIncidenciaSalario.GRATIFICACAO)) {
-					salarioGratificacao = funcionario.getSalarioFuncionario().doubleValue()
-							+ cargoIs.getValorIncidenciaSalario().doubleValue();
+					salarioFuncionario += cargoIs.getValorIncidenciaSalario().doubleValue();
 				}
 
 				if (cargoIs.getTipoIncidenciaSalario().equals(TipoIncidenciaSalario.DESCONTO)) {
-					salarioDesconto = funcionario.getSalarioFuncionario().doubleValue()
-							- cargoIs.getValorIncidenciaSalario().doubleValue();
+					salarioFuncionario -= cargoIs.getValorIncidenciaSalario().doubleValue();
 				}
 
-				BigDecimal salario = new BigDecimal(salarioGratificacao + salarioDesconto);
-				//salarioFuncionario = salario;
-			});
+			}
 
+			funcionario.setSalarioCalculadoFuncionario(new BigDecimal(salarioFuncionario));
+			salarioCalculado = funcionario.getSalarioCalculadoFuncionario().doubleValue();
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 
-		return salarioFuncionario.doubleValue();
+		return salarioCalculado;
 	}
 }

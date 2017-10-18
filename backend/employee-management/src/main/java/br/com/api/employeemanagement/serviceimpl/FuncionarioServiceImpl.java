@@ -3,6 +3,7 @@
  */
 package br.com.api.employeemanagement.serviceimpl;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.api.employeemanagement.calculos.CalculoIncidenciasCargo;
 import br.com.api.employeemanagement.domain.Funcionario;
-import br.com.api.employeemanagement.domain.TipoIncidenciaSalario;
 import br.com.api.employeemanagement.repository.FuncionarioRepository;
 import br.com.api.employeemanagement.service.FuncionarioService;
 
@@ -37,7 +37,10 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
 		funcionario.setFunciarioAtivo(true);
 		funcionario.setDataCadastro(LocalDate.now());
-		
+
+		funcionario.setSalarioCalculadoFuncionario(
+				new BigDecimal(calculoIncidenciasCargo.calcularSalarioFuncionario(funcionario)));
+
 		return funcionarioRepository.save(funcionario);
 	}
 
