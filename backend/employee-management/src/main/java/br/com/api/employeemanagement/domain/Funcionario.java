@@ -35,6 +35,9 @@ public class Funcionario implements Serializable {
 	private BigDecimal salarioFuncionario;
 
 	@Field
+	private BigDecimal salarioCalculadoFuncionario;
+
+	@Field
 	private boolean funciarioAtivo;
 
 	@Field
@@ -124,6 +127,14 @@ public class Funcionario implements Serializable {
 
 	public void setFuncionarioInncidenciasSalario(Set<IncidenciaSalario> funcionarioInncidenciasSalario) {
 		this.funcionarioInncidenciasSalario = funcionarioInncidenciasSalario;
+	}
+
+	public BigDecimal getSalarioCalculadoFuncionario() {
+		return salarioCalculadoFuncionario;
+	}
+
+	public void setSalarioCalculadoFuncionario(BigDecimal salarioCalculadoFuncionario) {
+		this.salarioCalculadoFuncionario = salarioCalculadoFuncionario;
 	}
 
 }
