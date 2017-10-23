@@ -4,6 +4,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router';
 import App from './App'
 import BootstrapVue from 'bootstrap-vue';
+import VueTheMask from 'vue-the-mask'
 
 //routes
 import { approutes } from './app-routes'
@@ -11,6 +12,7 @@ import { approutes } from './app-routes'
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
+Vue.use(VueTheMask)
 
 const approuter = new VueRouter({
   routes: approutes,

@@ -39,7 +39,9 @@
                                     <!--{{funcionario.funciarioAtivo}}-->
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm text-white"> Show </a>
+                                    <!--<a class="btn btn-primary btn-sm text-white"> Show </a>
+                                    <router-link to="/cargo/all" class="btn btn-primary btn-sm text-white">Details</router-link>-->
+                                    <router-link :to="{ name: 'funcionario-details', params: { funcionarioId: funcionario.idFuncinario }}" class="btn btn-primary btn-sm text-white">Details</router-link>
                                 </td>
                             </tr>
                         </tbody>

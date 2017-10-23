@@ -5,6 +5,7 @@ import CargoSave from './components/pages/Cargo/CargoSave';
 
 import List from './components/pages/Funcionario/List'
 import New from './components/pages/Funcionario/New'
+import View from './components/pages/Funcionario/View'
 
 export const approutes = [
     {
@@ -29,6 +30,11 @@ export const approutes = [
     {
         path: '/funcionario/new',
         component: New
+    },
+    {
+        path: '/funcionario/details/:funcionarioId',
+        component: View,
+        name: 'funcionario-details'
     }
 
 ]
