@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.api.employeemanagement.calculos.CalculoIncidenciasCargo;
+import br.com.api.employeemanagement.calculos.CalculoIncidenciasFuncionario;
 import br.com.api.employeemanagement.domain.Funcionario;
 import br.com.api.employeemanagement.repository.FuncionarioRepository;
 import br.com.api.employeemanagement.service.FuncionarioService;
@@ -32,15 +33,20 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	@Autowired
 	private CalculoIncidenciasCargo calculoIncidenciasCargo;
 
+	@Autowired
+	private CalculoIncidenciasFuncionario calculoIncidenciasFuncionario;
+
 	@Override
 	public Funcionario save(Funcionario funcionario) {
 
 		funcionario.setFunciarioAtivo(true);
 		funcionario.setDataCadastro(LocalDate.now());
 
-		funcionario.setSalarioCalculadoFuncionario(
-				new BigDecimal(calculoIncidenciasCargo.calcularSalarioFuncionario(funcionario)));
+		Double incidenciasSalariais = calculoIncidenciasCargo.calcularSalarioFuncionario(funcionario)
+				+ calculoIncidenciasFuncionario.calcularSalarioFuncionario(funcionario);
+		Double salarioCalculado = funcionario.getSalarioFuncionario().doubleValue() + incidenciasSalariais;
 
+		funcionario.setSalarioCalculadoFuncionario(new BigDecimal(salarioCalculado));
 		return funcionarioRepository.save(funcionario);
 	}
 

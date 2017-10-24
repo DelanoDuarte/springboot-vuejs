@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="form-group col-md-8">
                                 <label for="salarioFuncionario">Salário</label>
-                                <input type="number" class="form-control col-md-4" required id="salarioFuncionario" v-model="funcionario.salarioFuncionario" placeholder="Digite O Salário do Funcionário !">
+                                <input type="text" v-mask="'####.##'" class="form-control col-md-4" required id="salarioFuncionario" v-model="funcionario.salarioFuncionario" placeholder="Digite O Salário do Funcionário !">
                             </div>
                         </div>
 
@@ -108,6 +108,7 @@
 
 <script>
 import moment from 'moment'
+import { mask } from 'vue-the-mask'
 export default {
     name: 'funcionariosave',
     data() {
