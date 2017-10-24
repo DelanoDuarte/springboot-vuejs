@@ -16,7 +16,7 @@ import br.com.api.employeemanagement.domain.TipoIncidenciaSalario;
  *
  */
 @Service
-public class CalculoIncidenciasCargo implements Serializable {
+public class CalculoIncidenciasFuncionario implements Serializable {
 
 	/**
 	 * 
@@ -25,21 +25,20 @@ public class CalculoIncidenciasCargo implements Serializable {
 
 	public Double calcularSalarioFuncionario(Funcionario funcionario) {
 
+		if (funcionario.getFuncionarioInncidenciasSalario().isEmpty())
+			return 0.0;
+
 		Double incidencias = new Double(0.0);
 
 		try {
-			if (funcionario.getFuncionarioCargo().getCargoIncidenciasSalario().isEmpty()) {
-				return 0.0;
-			}
+			for (IncidenciaSalario ic : funcionario.getFuncionarioInncidenciasSalario()) {
 
-			for (IncidenciaSalario cargoIs : funcionario.getFuncionarioCargo().getCargoIncidenciasSalario()) {
-
-				if (cargoIs.getTipoIncidenciaSalario().equals(TipoIncidenciaSalario.GRATIFICACAO)) {
-					incidencias += cargoIs.getValorIncidenciaSalario().doubleValue();
+				if (ic.getTipoIncidenciaSalario().equals(TipoIncidenciaSalario.GRATIFICACAO)) {
+					incidencias += ic.getValorIncidenciaSalario().doubleValue();
 				}
 
-				if (cargoIs.getTipoIncidenciaSalario().equals(TipoIncidenciaSalario.DESCONTO)) {
-					incidencias -= cargoIs.getValorIncidenciaSalario().doubleValue();
+				if (ic.getTipoIncidenciaSalario().equals(TipoIncidenciaSalario.DESCONTO)) {
+					incidencias -= ic.getValorIncidenciaSalario().doubleValue();
 				}
 
 			}
