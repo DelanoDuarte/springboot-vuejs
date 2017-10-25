@@ -23,6 +23,10 @@ public class CalculoIncidenciasCargo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/*
+	 * Método que calculas as incidencias salariais, atreladas a um cargo. O
+	 * retorno do método é o valor somado de todas as incidencias.
+	 */
 	public Double calcularSalarioFuncionario(Funcionario funcionario) {
 
 		Double incidencias = new Double(0.0);

@@ -23,6 +23,11 @@ public class CalculoIncidenciasFuncionario implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/*
+	 * Método responsavel por calcular as incidencias selecionadas para um
+	 * funcionario, durante o cadastro do funcionario. Este método retorna a
+	 * soma de todas as incidencias escolhidas pelo usuario para ser cadastrada.
+	 */
 	public Double calcularSalarioFuncionario(Funcionario funcionario) {
 
 		if (funcionario.getFuncionarioInncidenciasSalario().isEmpty())
