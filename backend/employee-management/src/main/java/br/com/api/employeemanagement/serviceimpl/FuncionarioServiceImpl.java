@@ -36,6 +36,17 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	@Autowired
 	private CalculoIncidenciasFuncionario calculoIncidenciasFuncionario;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * br.com.api.employeemanagement.service.FuncionarioService#save(br.com.api.
+	 * employeemanagement.domain.Funcionario) Método para salvar um novo
+	 * funcionario no sistema. Todos os funcionários começam ativos,
+	 * posteriormente podendo ser desativados. Nesse método, tambem chama-se as
+	 * Classes auxiliares de calcula do salario, definindo aqui o valor final do
+	 * salário do funcionário
+	 */
 	@Override
 	public Funcionario save(Funcionario funcionario) {
 
